@@ -1,7 +1,6 @@
-# Sthack 2019 - CTF 
+# Sthack 2019 - CTF - Ticket Checker
 
-Write UP of "Ticket Checker" </br>
-<u>Creator:</u> Ghozt </br>
+<u>Creator of the challenge:</u> Ghozt </br>
 <u>Category:</u> WEB</br>
 <u>Difficulty:</u> Medium </br>
 </br>
