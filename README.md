@@ -5,7 +5,7 @@ Write UP of "Ticket Checker" </br>
 <u>Category:</u> WEB</br>
 <u>Difficulty:</u> Medium </br>
 </br>
-<b><u>Step 1:</u></b></br>
+<b><u>Step 1:</u> Smile to the camera to find the entry point</b></br>
 </br>
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.</br>
 Once done, we get the following error: <b>"Error - Could not parse json"</b>.</br>
@@ -27,6 +27,8 @@ Be carefull of the encoding here! </br>
 SCREENSHOT COMMENT PARAM</br>
 </br>
 OK ! Missing the key '<b>uid</b>' in the JSON.</br>
+</br>
+<b><u>Step 2:</u> Try to exploit this!</b></br>
 Let's add it...</br>
 SCREENSHOT QRENCODE CMD ID = 1</br>
 </br>
@@ -35,6 +37,8 @@ But... what if instead of the id 1, we use one maybe unknown? </br>
 SCREENSHOT QRENCODE CMD BIG ID </br>
 </br>
 GREAT database error!</br>
+</br>
+<b><u>Step 3:</u> Injection SQL - Integer Based</b></br>
 Let's try for some Injection SQL!</br>
 I will pass throught all SQL Injection tested with single quote, double quote and so on... It is an interger one here!</br>
 Finding the right number of columns...</br>
@@ -53,9 +57,25 @@ SCREENSHOT CURRENT LOAD_FILE /var/www/html/index.php OUTPUT</br>
 Let's leak some code here!</br>
 <br/>
 We get the following source code:</br>
-- index.php</br>
+- check.php</br>
 - ticket.php</br>
 - dbb.php</br>
 </br>
+</br>
+<b><u>Step 4:</u> Read the source code</b></br>
+SCREENSHOT OF CHECK.PHP</br>
+SCREENSHOT OF TICKET.PHP</br>
+On the ticket.php file, we see that our the program will die if we have not put the <b>t_uid, object, and sign</b> JSON key. </br>
+Great, but what should we put inside?</br>
+We need to continue to read the check.php file a bit before to answer this question.</br>
+There is a KEY got from the database which will be used to create a Signature object.</br>
+Let's grab it!</br>
+SCREENSHOT QRENCODE SQL INJECTION</br>
+SCREENSHOT output</br>
+//TO BE CONTINUE
+SCREENSHOT OF VULNERABLE PART</br>
 The source code of the ticket.php file reveals a vulnerability: <b>A PHP Object Injection!</b></br>
 But before to get it... take your car, and let's drive <b>a lot!</b>, because the final step is still far away! (Thank you so much GHOZT for that!)</br>
+</br>
+<b><u>Step 5:</u> Create your most beautiful object!</b></br>
+We know that ...</br>
