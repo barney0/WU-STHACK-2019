@@ -76,5 +76,10 @@ SCREENSHOT OF VULNERABLE PART</br>
 The source code of the ticket.php file reveals a vulnerability: <b>A PHP Object Injection!</b></br>
 But before to get it... take your car, and let's drive <b>a lot!</b>, because the final step is still far away! (Thank you so much GHOZT for that!)</br>
 </br>
-<b><u>Step 5:</u> Create your most beautiful object!</b></br>
+<b><u>Step 5:</u> Create your most beautiful object to RCE!</b></br> //ID cmd
 We know that ...</br>
+</br>
+<b><u>Step 6:</u> Get the flag, and go drink a beer!</b></br> //RCE shell
+ls /
+cat /flag.txt
+Flag is: FLAG
