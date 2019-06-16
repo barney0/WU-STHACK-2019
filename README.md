@@ -25,11 +25,37 @@ SCREENSHOT QRENCODE CMD</br>
 We put the output into the raw-data of the data image in the "<b>comment</b>" parameter.</br>
 Be carefull of the encoding here! </br>
 SCREENSHOT COMMENT PARAM</br>
+</br>
 OK ! Missing the key '<b>uid</b>' in the JSON.</br>
 Let's add it...</br>
 SCREENSHOT QRENCODE CMD ID = 1</br>
+</br>
 Now we get a correct output telling us that the ticket has already been used.</br>
 But... what if instead of the id 1, we use one maybe unknown? </br>
 SCREENSHOT QRENCODE CMD BIG ID </br>
+</br>
 GREAT database error!</br>
 Let's try for some Injection SQL!</br>
+I will pass throught all SQL Injection tested with single quote, double quote and so on... It is an interger one here!</br>
+Finding the right number of columns...</br>
+SCREENSHOT QRENCODE CMD</br>
+SCREENSHOT SQL INJECTION ORDER BY OUTPUT</br>
+</br>
+Finding the current user, the database... </br>
+SCREENSHOT QRENCODE CMD VERSION AND DB</br>
+SCREENSHOT CURRENT VERSION AND DATABASE OUTPUT</br>
+</br>
+<b>Nice</b> but I can not do anything better with that? Actually yes, let's try to read some local files!</br>
+SCREENSHOT QRENCODE CMD LOAD_FILE</br>
+SCREENSHOT CURRENT LOAD_FILE /var/www/html/index.php OUTPUT</br>
+</br>
+<b>Great!!!</b></br>
+Let's leak some code here!</br>
+<br/>
+We get the following source code:</br>
+- index.php</br>
+- ticket.php</br>
+- dbb.php</br>
+</br>
+The source code of the ticket.php file reveals a vulnerability: <b>A PHP Object Injection!</b></br>
+But before to get it... take your car, and let's drive <b>a lot!</b>, because the final step is still far away! (Thank you so much GHOZT for that!)</br>
