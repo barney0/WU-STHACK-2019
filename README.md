@@ -66,7 +66,7 @@ We need to know the right number used by the database. Using "order by" with 5 c
 
 ![order_by](/order.png)
 
-But using 4, it is ok meaning that we have 4 columns used:
+But using 4, it is ok meaning that we have 4 columns used. Output "2" and "3" are displayed, we can use it to exploit our SQL Injection:
 
 ![test_1_2_3_4](/union_1_2_3_4.png)
 
