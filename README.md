@@ -136,7 +136,7 @@ I will explain the added part:
 * Base64 encode the output
 * Sign it using the hmac methode took from the Signature class
 
-## **Step 5: Create your most beautiful object to test exploitation!**
+## **Step 5: Create your most beautiful object!**
 
 The output will be like:
 
@@ -150,7 +150,7 @@ Let's analyze the server in order to get the flag and finaly have a break to dri
 
 ![outputflag](/outputflag.png)
 
-## **Step 6: Get the flag, and go drink a beer!** //RCE shell
+## **Step 6: Get the flag, and go drink a beer!**
 
 Get the flag!
 
