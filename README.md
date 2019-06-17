@@ -4,7 +4,7 @@
 <u>Category:</u> WEB</br>
 <u>Difficulty:</u> Medium </br>
 </br>
-***Step 1:* Smile to the camera to find the entry point**</br>
+##**Step 1: Smile to the camera to find the entry point**</br>
 </br>
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.</br>
 Once done, we get the following error: **"Error - Could not parse json"**.</br>
@@ -27,7 +27,7 @@ SCREENSHOT COMMENT PARAM</br>
 </br>
 OK ! Missing the key '<b>uid</b>' in the JSON.</br>
 </br>
-***Step 2:* Try to exploit this!**</br>
+##**Step 2: Try to exploit this!**</br>
 Let's add it...</br>
 SCREENSHOT QRENCODE CMD ID = 1</br>
 </br>
@@ -37,7 +37,7 @@ SCREENSHOT QRENCODE CMD BIG ID </br>
 </br>
 GREAT database error!</br>
 </br>
-***Step 3:* Injection SQL - Integer Based**</br>
+##**Step 3: Injection SQL - Integer Based**</br>
 Let's try for some Injection SQL!</br>
 I will pass throught all SQL Injection tested with single quote, double quote and so on... It is an interger one here!</br>
 Finding the right number of columns...</br>
@@ -52,7 +52,7 @@ SCREENSHOT CURRENT VERSION AND DATABASE OUTPUT</br>
 SCREENSHOT QRENCODE CMD LOAD_FILE</br>
 SCREENSHOT CURRENT LOAD_FILE /var/www/html/index.php OUTPUT</br>
 </br>
-**Great!!!**</br>
+##**Great!!!**</br>
 Let's leak some code here!</br>
 <br/>
 We get the following source code:</br>
@@ -61,7 +61,7 @@ We get the following source code:</br>
 * dbb.php</br>
 </br>
 </br>
-***Step 4:* Read the source code**</br>
+##**Step 4: Read the source code**</br>
 SCREENSHOT OF CHECK.PHP</br>
 SCREENSHOT OF TICKET.PHP</br>
 On the ticket.php file, we see that our the program will die if we have not put the <b>t_uid, object, and sign</b> JSON key. </br>
@@ -76,10 +76,10 @@ SCREENSHOT OF VULNERABLE PART</br>
 The source code of the ticket.php file reveals a vulnerability: <b>A PHP Object Injection!</b></br>
 But before to get it... take your car, and let's drive <b>a lot!</b>, because the final step is still far away! (Thank you so much GHOZT for that!)</br>
 </br>
-***Step 5:* Create your most beautiful object to RCE!*</br> //ID cmd
+##**Step 5: Create your most beautiful object to RCE!**</br> //ID cmd
 We know that ...</br>
 </br>
-***Step 6:* Get the flag, and go drink a beer!**</br> //RCE shell
+##**Step 6: Get the flag, and go drink a beer!**</br> //RCE shell
 ls /
 cat /flag.txt
 Flag is: FLAG</br>
