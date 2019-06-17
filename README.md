@@ -7,7 +7,7 @@
 
 ## **Step 1: Follow the errors**
 
-Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.
+Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) using your camera.
 
 Once done, we get the following error:
 
@@ -20,9 +20,9 @@ From Burp, we intercept the request and save it for later.
 We use the tool "qrencode" to create a QRCode to put the content I want inside.
 
 For all the next steps, the process will be like the following:
-* Create a QRCode using qrencode, containing our data to be tested inside.
-* Base64 encoded the the output of the command.
-* Send it throught the repeater as seen before.
+* Create a QRCode using qrencode, containing our data to be tested inside
+* Base64 encoded the output of the command
+* Send it throught the repeater
 
 Let's start with an empty json:
 
