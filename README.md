@@ -4,7 +4,7 @@
 <u>Category:</u> WEB
 <u>Difficulty:</u> Medium
 
-# **Step 1: Smile to the camera to find the entry point**
+## **Step 1: Smile to the camera to find the entry point**
 
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.
 Once done, we get the following error: **"Error - Could not parse json"**.
@@ -37,7 +37,7 @@ SCREENSHOT QRENCODE CMD BIG ID
 
 GREAT database error!
 
-### **Step 3: Injection SQL - Integer Based**
+## **Step 3: Injection SQL - Integer Based**
 Let's try for some Injection SQL!
 I will pass throught all SQL Injection tested with single quote, double quote and so on... It is an interger one here!
 Finding the right number of columns...
