@@ -1,8 +1,7 @@
 # Sthack 2019 - CTF - Ticket Checker
-
-<u>Creator of the challenge:</u> Ghozt
-<u>Category:</u> WEB
-<u>Difficulty:</u> Medium
+*Creator of the challenge:* Ghozt
+*Category:* WEB
+*Difficulty:* Medium
 
 ## **Step 1: Follow the errors**
 
@@ -10,7 +9,7 @@ Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) fr
 
 Once done, we get the following error: **"Error - Could not parse json"**.
 
-SCREENSHOT ERROR BURP
+![error_json](/error_json.png)
 
 Hum...
 
