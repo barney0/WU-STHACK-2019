@@ -4,10 +4,10 @@
 <u>Category:</u> WEB</br>
 <u>Difficulty:</u> Medium </br>
 </br>
-<b><u>Step 1:</u> Smile to the camera to find the entry point</b></br>
+***Step 1:* Smile to the camera to find the entry point**</br>
 </br>
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.</br>
-Once done, we get the following error: <b>"Error - Could not parse json"</b>.</br>
+Once done, we get the following error: **"Error - Could not parse json"**.</br>
 SCREENSHOT ERROR BURP</br>
 </br>
 Hum... </br>
@@ -17,17 +17,17 @@ We use the tool "qrencode" to create a QRCode to put the content I want inside.<
 We start with an empty json:</br>
 </br>
 SCREENSHOT QRENCODE CMD</br>
-<i>qrencode '{}' -o - | base64 -w 0</i></br>
-<i>-o - : output directly on the standard output</i></br>
-<i>-w 0</i> : disable line wrapping</br>
+*qrencode '{}' -o - | base64 -w 0*</br>
+*-o -*: output directly on the standard output</br>
+*-w 0* : disable line wrapping</br>
 </br>
-We put the output into the raw-data of the data image in the "<b>comment</b>" parameter.</br>
+We put the output into the raw-data of the data image in the "**comment**" parameter.</br>
 Be carefull of the encoding here! </br>
 SCREENSHOT COMMENT PARAM</br>
 </br>
 OK ! Missing the key '<b>uid</b>' in the JSON.</br>
 </br>
-<b><u>Step 2:</u> Try to exploit this!</b></br>
+***Step 2:* Try to exploit this!**</br>
 Let's add it...</br>
 SCREENSHOT QRENCODE CMD ID = 1</br>
 </br>
@@ -37,7 +37,7 @@ SCREENSHOT QRENCODE CMD BIG ID </br>
 </br>
 GREAT database error!</br>
 </br>
-<b><u>Step 3:</u> Injection SQL - Integer Based</b></br>
+***Step 3:* Injection SQL - Integer Based**</br>
 Let's try for some Injection SQL!</br>
 I will pass throught all SQL Injection tested with single quote, double quote and so on... It is an interger one here!</br>
 Finding the right number of columns...</br>
@@ -52,16 +52,16 @@ SCREENSHOT CURRENT VERSION AND DATABASE OUTPUT</br>
 SCREENSHOT QRENCODE CMD LOAD_FILE</br>
 SCREENSHOT CURRENT LOAD_FILE /var/www/html/index.php OUTPUT</br>
 </br>
-<b>Great!!!</b></br>
+**Great!!!**</br>
 Let's leak some code here!</br>
 <br/>
 We get the following source code:</br>
-- check.php</br>
-- ticket.php</br>
-- dbb.php</br>
+* check.php</br>
+* ticket.php</br>
+* dbb.php</br>
 </br>
 </br>
-<b><u>Step 4:</u> Read the source code</b></br>
+***Step 4:* Read the source code**</br>
 SCREENSHOT OF CHECK.PHP</br>
 SCREENSHOT OF TICKET.PHP</br>
 On the ticket.php file, we see that our the program will die if we have not put the <b>t_uid, object, and sign</b> JSON key. </br>
@@ -76,11 +76,11 @@ SCREENSHOT OF VULNERABLE PART</br>
 The source code of the ticket.php file reveals a vulnerability: <b>A PHP Object Injection!</b></br>
 But before to get it... take your car, and let's drive <b>a lot!</b>, because the final step is still far away! (Thank you so much GHOZT for that!)</br>
 </br>
-<b><u>Step 5:</u> Create your most beautiful object to RCE!</b></br> //ID cmd
+***Step 5:* Create your most beautiful object to RCE!*</br> //ID cmd
 We know that ...</br>
 </br>
-<b><u>Step 6:</u> Get the flag, and go drink a beer!</b></br> //RCE shell
+***Step 6:* Get the flag, and go drink a beer!**</br> //RCE shell
 ls /
 cat /flag.txt
 Flag is: FLAG</br>
-![alt text](https://raw.githubusercontent.com/barney0/sthack2019/master/verre-chope.jpg)
+![GitHub Logo](/verre-chope.jpg)
