@@ -1,6 +1,8 @@
 # Sthack 2019 - CTF - Ticket Checker
 *Creator of the challenge:* Ghozt
+
 *Category:* WEB
+
 *Difficulty:* Medium
 
 ## **Step 1: Follow the errors**
