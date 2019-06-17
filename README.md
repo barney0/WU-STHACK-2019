@@ -120,8 +120,6 @@ If not, we continue to the unserialize call and the log function from the Ticket
 To pass the signature, we get the source code of the Ticket.php file on our machine to modify it and pass the check. We need to change some part:
 
 * Changing the filename in the History class to avoid our php object to be different at every try on our local test
-![filename](/filename.png)
-
 * Hardcoding the key in the Signature class as localy it will not request the database
 * Adding the following source code to display the values we need to set in the **object** and **sign** keys:
 
