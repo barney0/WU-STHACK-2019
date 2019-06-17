@@ -4,7 +4,7 @@
 <u>Category:</u> WEB
 <u>Difficulty:</u> Medium
 
-## **Step 1: Smile to the camera to find the entry point**
+## **Step 1: Follow the errors**
 
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.
 Once done, we get the following error: **"Error - Could not parse json"**.
@@ -17,9 +17,9 @@ We use the tool "qrencode" to create a QRCode to put the content I want inside.
 We start with an empty json:
 
 SCREENSHOT QRENCODE CMD
-*qrencode '{}' -o - | base64 -w 0*
-*-o -*: output directly on the standard output
-*-w 0* : disable line wrapping
+  *qrencode '{}' -o - | base64 -w 0*
+  *-o -*: output directly on the standard output
+  *-w 0* : disable line wrapping
 
 We put the output into the raw-data of the data image in the "**comment**" parameter.
 Be carefull of the encoding here!
@@ -27,7 +27,7 @@ SCREENSHOT COMMENT PARAM
 
 OK ! Missing the key '<b>uid</b>' in the JSON.
 
-## **Step 2: Try to exploit this!**
+## **Step 2: Find the entry point**
 Let's add it...
 SCREENSHOT QRENCODE CMD ID = 1
 
@@ -48,7 +48,7 @@ Finding the current user, the database...
 SCREENSHOT QRENCODE CMD VERSION AND DB
 SCREENSHOT CURRENT VERSION AND DATABASE OUTPUT
 
-<b>Nice</b> but I can not do anything better with that? Actually yes, let's try to read some local files!
+**Nice** but I can not do anything better with that? Actually yes, let's try to read some local files!
 SCREENSHOT QRENCODE CMD LOAD_FILE
 SCREENSHOT CURRENT LOAD_FILE /var/www/html/index.php OUTPUT
 
@@ -82,4 +82,5 @@ We know that ...
 ls /
 cat /flag.txt
 Flag is: FLAG
-![GitHub Logo](/verre-chope.jpg)
+
+![Cheers](/verre-chope.jpg)
