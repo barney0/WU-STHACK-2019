@@ -7,7 +7,9 @@
 ## **Step 1: Follow the errors**
 
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.
+
 Once done, we get the following error: **"Error - Could not parse json"**.
+
 SCREENSHOT ERROR BURP
 
 Hum...
