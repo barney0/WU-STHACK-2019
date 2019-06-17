@@ -91,13 +91,15 @@ The usefull files to continue the challenge are:
 * check.php
 * ticket.php
 
-## **Step 4: Read the source code**
+## **Step 4: Read the source code and understand it**
 
-By analyzing the check.php and the Ticket.php files, our goal is to reach the call to the log() function from the Ticket class.
+By analyzing the check.php and the Ticket.php files, our goal is to reach the call to the log() function from the Ticket class. In this function, there is a call to the system function with one user input:
 
-So let make the program do it.
+![system](/system.png)
 
-If there is no **t_uid, object, and sign** keys in the JSON, the program terminates is execution.
+It may be a **PHP Object Injection!**. Let's verify it...
+
+Back to the check.php file, if there is no **t_uid, object, and sign** keys in the JSON, the program terminates is execution.
 
 ![die4](/die4.png)
 
@@ -113,30 +115,49 @@ Let's grab it! It would be usefull:
 
 After getting the key, the program create a Signature Object. Call the method Check(), dies if the check is wrong.
 
-We get the source code of the Ticket.php file on our machine to modify it and pass the check. We need to change some part:
+If not, we continue to the unserialize call and the log function from the Ticket class. All leading to the call to the system function!
 
-* Changing the filename in the History class
+To pass the signature, we get the source code of the Ticket.php file on our machine to modify it and pass the check. We need to change some part:
+
+* Changing the filename in the History class to avoid our php object to be different at every try on our local test
+![filename](/filename.png)
 * Hardcoding the key in the Signature class
-* Adding the following source code to pass the right value of the **object** and **sign** keys
+* Adding the following source code to pass the right value of the **object** and **sign** keys:
 
 ![code_modified](/code_modified.png)
 
+I will explain the added part:
 
+* Creation of a new Ticket instance that will be used on the unserialize call
+* Creation of a new History instance needed in the Ticket class
+* Changing the value of data in the History class. This value will be injected to the system function leading to a some **CODE EXECUTION**
+* Linking the new History instance into the Ticket instance
+* Serialize the Ticket instance
+* Base64 encode the output
+* Sign it using the hmac methode took from the Signature class
 
-The source code of the ticket.php file reveals a vulnerability: **A PHP Object Injection!**
+## **Step 5: Create your most beautiful object to test exploitation!**
 
-But before to get it... take your car, and let's drive **a lot!**, because the final step is still far away! (Thank you so much GHOZT for that!)
+The output will be like:
 
-## **Step 5: Create your most beautiful object to RCE!** //ID cmd
+![test_id_rce](/test_id_rce.png)
 
-We know that ...
+![output_rce](/id.png)
+
+Let's analyze the server in order to get the flag and finaly have a break to drink a bit!
+
+![laroot](/laroot.png)
+
+![outputflag](/outputflag.png)
 
 ## **Step 6: Get the flag, and go drink a beer!** //RCE shell
 
-ls /
+Get the flag!
 
-cat /flag.txt
+![flag](/flag.png)
 
-Flag is: FLAG
+![flag_output](/flag_output.png)
+
+Flag is: QrSql1_t0_uNs3r1i4lIz3_S0_L0l
 
 ![Cheers](/verre-chope.jpg)
