@@ -82,16 +82,20 @@ Finding the current user, the database...
 
 ![check](/check.png)
 
-## **Great!!!**
+**Great!!!**
 We can leak the source code!
 
-The usefull file to continue the chall are:
+The usefull files to continue the challenge are:
 * check.php
 * ticket.php
 
 ## **Step 4: Read the source code**
 
-By analyzing the check.php file, if there is no **t_uid, object, and sign** keys in the JSON, the program terminates is execution.
+By analyzing the check.php and the Ticket.php files, our goal is to reach the call to the log() function from the Ticket class.
+
+So let make the program do it.
+
+If there is no **t_uid, object, and sign** keys in the JSON, the program terminates is execution.
 
 ![die4](/die4.png)
 
@@ -104,6 +108,18 @@ Let's grab it! It would be usefull:
 ![key](/KEY.png)
 
 ![KEY_2](/KEY_2.png)
+
+After getting the key, the program create a Signature Object. Call the method Check(), dies if the check is wrong.
+
+We get the source code of the Ticket.php file on our machine to modify it and pass this check:
+
+* Changing the filename
+* Hardcoding the key got before
+* Adding the following source code to pass the right value of the **object** and **sign** keys
+
+![code_modified](/code_modified.png)
+
+
 
 The source code of the ticket.php file reveals a vulnerability: **A PHP Object Injection!**
 
