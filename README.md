@@ -83,4 +83,4 @@ We know that ...</br>
 ls /
 cat /flag.txt
 Flag is: FLAG</br>
-![alt text](https://github.com/barney0/sthack2019/blob/master/verre-chope.jpg) </br>
+![title](https://raw.githubusercontent.com/barney0/sthack2019/master/verre-chope.jpg) </br>
