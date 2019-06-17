@@ -82,4 +82,5 @@ We know that ...</br>
 <b><u>Step 6:</u> Get the flag, and go drink a beer!</b></br> //RCE shell
 ls /
 cat /flag.txt
-Flag is: FLAG
+Flag is: FLAG</br>
+![alt text](https://github.com/barney0/sthack2019/blob/master/verre-chope.jpg) </br>
