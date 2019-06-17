@@ -62,7 +62,7 @@ But if we use one which may be unknown, we get a database error.
 
 Let's try for some Injection SQL as we are talking to the database!
 
-I will pass throught all SQL Injection tested as one using 'single quote', "double quote" and so on... Here, it is an interger based!
+I will not detail all SQL Injection tested as one using 'single quote', "double quote" and so on... Here, it is an interger based!
 
 We need to know the right number used by the database. Using "order by" with 5 columns, we get an error: 
 
