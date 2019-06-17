@@ -111,10 +111,10 @@ Let's grab it! It would be usefull:
 
 After getting the key, the program create a Signature Object. Call the method Check(), dies if the check is wrong.
 
-We get the source code of the Ticket.php file on our machine to modify it and pass this check:
+We get the source code of the Ticket.php file on our machine to modify it and pass the check. We need to change some part:
 
-* Changing the filename
-* Hardcoding the key got before
+* Changing the filename in the History class
+* Hardcoding the key in the Signature class
 * Adding the following source code to pass the right value of the **object** and **sign** keys
 
 ![code_modified](/code_modified.png)
