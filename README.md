@@ -56,6 +56,8 @@ Now we get a correct output telling us that the ticket has already been used:
 
 But if we use one which may be unknown, we get a database error.
 
+![error_db](/error_db.png)
+
 ## **Step 3: Injection SQL - Integer Based**
 
 Let's try for some Injection SQL as we are talking to the database!
