@@ -7,7 +7,7 @@
 
 Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) from your camera.
 
-Once done, we get the following error: **"Error - Could not parse json"**.
+Once done, we get the following error:
 
 ![error_json](/error_json.png)
 
@@ -17,91 +17,91 @@ From Burp, we intercept the request and save it for later.
 
 We use the tool "qrencode" to create a QRCode to put the content I want inside.
 
-We start with an empty json:
+For all the next steps, the process will be like the following:
+* Create a QRCode using qrencode, containing our data to be tested inside.
+* Base64 encoded the the output of the command.
+* Send it throught the repeater as seen before.
 
-SCREENSHOT QRENCODE CMD
+Let's start with an empty json:
 
+![json_empty](/qrencode_base.png)
 +  *qrencode '{}' -o - | base64 -w 0*
 +  *-o -*: output directly on the standard output
 +  *-w 0* : disable line wrapping
 
 We put the output into the raw-data of the data image in the "**comment**" parameter.
 
-Be carefull of the encoding here!
+Be carefull to encode the base64 just added to avoid the following error:
+![error_2_encoding](/error_2_encoding.png)
 
-SCREENSHOT COMMENT PARAM
+Once encoded:
+
+![parameter](/json_empty.png)
 
 OK ! Missing the key '<b>uid</b>' in the JSON.
+
+![json_uid](/json_uid.png)
 
 ## **Step 2: Find the entry point**
 
 Let's add it...
 
-SCREENSHOT QRENCODE CMD ID = 1
+![qrencode_uid](/qrencode_uid.png)
 
-Now we get a correct output telling us that the ticket has already been used.
+Now we get a correct output telling us that the ticket has already been used:
 
-But... what if instead of the id 1, we use one maybe unknown?
+![output_uid](/output_uid.png)
 
-SCREENSHOT QRENCODE CMD BIG ID
-
-GREAT database error!
+But if we use one which may be unknown, we get a database error.
 
 ## **Step 3: Injection SQL - Integer Based**
 
-Let's try for some Injection SQL!
+Let's try for some Injection SQL as we are talking to the database!
 
-I will pass throught all SQL Injection tested with single quote, double quote and so on... It is an interger one here!
+I will pass throught all SQL Injection tested as one using 'single quote', "double quote" and so on... Here, it is an interger based!
 
-Finding the right number of columns...
+We need to know the right number used by the database. Using "order by" with 5 columns, we get an error: 
 
-SCREENSHOT QRENCODE CMD
+![order_by](/order.png)
 
-SCREENSHOT SQL INJECTION ORDER BY OUTPUT
+But using 4, it is ok meaning that we have 4 columns used:
+
+![test_1_2_3_4](/union_1_2_3_4.png)
+
+![reflect_value](/reflected_value.png)
 
 Finding the current user, the database... 
 
-SCREENSHOT QRENCODE CMD VERSION AND DB
-
-SCREENSHOT CURRENT VERSION AND DATABASE OUTPUT
+![output_sqli](/output_sqli.png)
 
 **Nice** but I can not do anything better with that? Actually yes, let's try to read some local files!
 
-SCREENSHOT QRENCODE CMD LOAD_FILE
+![load_file](/load_file.png)
 
-SCREENSHOT CURRENT LOAD_FILE /var/www/html/index.php OUTPUT
+![check](/check.png)
 
 ## **Great!!!**
-Let's leak some code here!
+We can leak the source code!
 
-We get the following source code:
+The usefull file to continue the chall are:
 * check.php
 * ticket.php
-* dbb.php
 
 ## **Step 4: Read the source code**
 
-SCREENSHOT OF CHECK.PHP
+By analyzing the check.php file, if there is no **t_uid, object, and sign** keys in the JSON, the program terminates is execution.
 
-SCREENSHOT OF TICKET.PHP
+![die4](/die4.png)
 
-On the ticket.php file, we see that our the program will die if we have not put the **t_uid, object, and sign** JSON key.
+We add those keys to continue the execution and pass the condition.
 
-Great, but what should we put inside?
+The program get a KEY got from the database which will be used to create a Signature object.
 
-We need to continue to read the check.php file a bit before to answer this question.
+Let's grab it! It would be usefull:
 
-There is a KEY got from the database which will be used to create a Signature object.
+![key](/KEY.png)
 
-Let's grab it!
-
-SCREENSHOT QRENCODE SQL INJECTION
-
-SCREENSHOT output
-
-//TO BE CONTINUE
-
-SCREENSHOT OF VULNERABLE PART
+![KEY_2](/KEY_2.png)
 
 The source code of the ticket.php file reveals a vulnerability: **A PHP Object Injection!**
 
