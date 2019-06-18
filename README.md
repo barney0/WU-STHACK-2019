@@ -33,7 +33,7 @@ Let's start with an empty json:
 +  *-o -*: output directly on the standard output
 +  *-w 0* : disable line wrapping
 
-We put the output into the raw-data of the data image in the "**comment**" parameter.
+We put the output into the raw-data of the data image in the "**image**" parameter.
 
 Be carefull to encode the base64 just added to avoid the following error:
 ![error_2_encoding](/error_2_encoding.png)
