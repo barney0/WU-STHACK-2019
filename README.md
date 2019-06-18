@@ -46,7 +46,7 @@ Once encoded:
 
 ## **Step 2: Find the entry point**
 
-Let's add it an retry...
+Let's add it and retry...
 
 ![qrencode_uid](/qrencode_uid.png)
 
