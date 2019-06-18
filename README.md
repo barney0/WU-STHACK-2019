@@ -70,7 +70,7 @@ We need to know the right number used by the database. Using "order by" with 5 c
 
 But using 4, it is ok meaning that we have 4 columns used. Output "2" and "3" are displayed, thus we can use it to exploit our SQL Injection:
 
-*qrencode '{"uid":"100000000 union select 1,2,3,4"}' -o - | base64 -w 0
+*qrencode '{"uid":"100000000 union select 1,2,3,4"}' -o - | base64 -w 0*
 
 ![reflect_value](/reflected_value.png)
 
