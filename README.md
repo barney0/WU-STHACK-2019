@@ -15,6 +15,8 @@ Once done, we get the following error:
 
 Hum...
 
+![barney](/barney.jpg)
+
 From Burp, we intercept the request and save it for later.
 
 We use the tool "qrencode" to create a QRCode to put the content we want inside.
