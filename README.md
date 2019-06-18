@@ -99,7 +99,7 @@ By analyzing the check.php and the Ticket.php files, our final goal is to reach 
 
 ![system](/system.png)
 
-It may be a **PHP Object Injection!**. Let's verify it...
+It may be a **PHP Object Injection!** Let's verify it...
 
 Back to the check.php file, if there is no **t_uid, object, and sign** keys in the JSON, the program terminates his execution.
 
