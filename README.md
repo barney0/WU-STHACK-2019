@@ -64,7 +64,7 @@ Let's try some SQL Injection as we are requesting the database!
 
 We will not detail all SQL Injection tested using 'single quote', "double quote" and so on... Here, it is an interger based!
 
-We need to know the right number used by the database. Using "order by" with 5 columns, we get an error: 
+We need to know the right number of columns used by the database. Using "order by" with 5 columns, we get an error: 
 
 ![order_by](/order.png)
 
