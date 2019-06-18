@@ -78,14 +78,14 @@ Extracting the current user, the database...
 
 ![output_sqli](/output_sqli.png)
 
-**Nice** but I can not do anything better with that? Actually yes, let's try to read some local files!
+**Nice** but could we do something better with that? Actually yes => read some local files!
 
 ![load_file](/load_file.png)
 
 ![check](/check.png)
 
 **Great!!!**
-We can leak the source code!
+We can leak the source code of the application located in /var/www/html/
 
 The usefull files to continue the challenge are:
 * check.php
@@ -103,9 +103,9 @@ Back to the check.php file, if there is no **t_uid, object, and sign** keys in t
 
 ![die4](/die4.png)
 
-We add those keys to continue the execution and pass the condition.
+We add those JSON keys to continue the execution and pass the condition.
 
-The program get a KEY got from the database which will be used to create a Signature object.
+The program request the database for a KEY which will be used to create a Signature object.
 
 Let's grab it! It would be usefull:
 
@@ -115,11 +115,11 @@ Let's grab it! It would be usefull:
 
 After getting the key, the program create a Signature Object. Call the method Check(), dies if the check is wrong.
 
-If not, we continue to the unserialize call and the log function from the Ticket class. All leading to the call to the system function!
+If not, we continue to the unserialize call and the log function from the Ticket class. All leading to the system call!
 
-To pass the signature, we get the source code of the Ticket.php file on our machine to modify it and pass the check. We need to change some part:
+To pass the signature, we get the source code of the Ticket.php file on our machine to modify it and pass the check. We need to change some parts:
 
-* Changing the filename in the History class to avoid our php object to be different at every try on our local test
+* Changing the filename in the History class to avoid our php object to be different at every tries on our local test
 * Hardcoding the key in the Signature class as localy it will not request the database
 * Adding the following source code to display the values we need to set in the **object** and **sign** keys:
 
