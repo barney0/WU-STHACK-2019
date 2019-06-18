@@ -15,7 +15,7 @@ Once done, we get the following error:
 
 Hum...
 
-![Barney](/Barney.png){height="200px" width="200px"}
+![Barney](/Barney.png)
 
 From Burp, we intercept the request and save it for later.
 
