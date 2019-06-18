@@ -131,11 +131,11 @@ I will explain the added part:
 
 * Creation of a new Ticket instance that will be used on the unserialize call
 * Creation of a new History instance needed in the Ticket class
-* Changing the value of data in the History class. This value will be injected to the system function leading to a some **CODE EXECUTION**
+* Changing the value of data in the History class. This value will be injected to the system function leading to a **CODE EXECUTION**
 * Linking the new History instance into the Ticket instance
 * Serialize the Ticket instance
 * Base64 encode the output
-* Sign it using the hmac methode took from the Signature class
+* Sign it using the hash_hmac methode took from the Signature class
 
 ## **Step 5: Create your most beautiful object!**
 
@@ -155,7 +155,7 @@ Let's create the QRCode for this:
 
 **Object**: contain the Ticket instance
 
-**Sign**: hmac_mac of the object using the key
+**Sign**: hash_hmac of the object using the key
 
 ![outputflag](/outputflag.png)
 
