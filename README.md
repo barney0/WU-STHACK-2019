@@ -11,11 +11,11 @@ Reaching the website, we get a webpage allowing you to scan a ticket (QRCode) us
 
 Once done, we get the following error:
 
-![error_json](/error_json.png)
+![error_json](img/error_json.png)
 
 Hum...
 
-![Barney](/Barney2resized.png)
+![Barney](img/Barney2resized.png)
 
 From Burp, we intercept the request and save it for later.
 
@@ -28,7 +28,7 @@ For all the next steps, the process will be like the following:
 
 Let's start with an empty json:
 
-![json_empty](/qrencode_base.png)
+![json_empty](img/qrencode_base.png)
 +  *qrencode '{}' -o - | base64 -w 0*
 +  *-o -*: output directly on the standard output
 +  *-w 0* : disable line wrapping
@@ -36,29 +36,29 @@ Let's start with an empty json:
 We put the output into the raw-data of the data image in the "**image**" parameter.
 
 Be carefull to encode the base64 just added to avoid the following error:
-![error_2_encoding](/error_2_encoding.png)
+![error_2_encoding](img/error_2_encoding.png)
 
 Once encoded:
 
-![parameter](/json_empty.png)
+![parameter](img/json_empty.png)
 
 **OK !** New error message, that the key '<b>uid</b>' is missing in the JSON.
 
-![json_uid](/json_uid.png)
+![json_uid](img/json_uid.png)
 
 ## **Step 2: Find the entry point**
 
 Let's add it and retry...
 
-![qrencode_uid](/qrencode_uid.png)
+![qrencode_uid](img/qrencode_uid.png)
 
 Now we get a correct output telling us that the ticket has already been used:
 
-![output_uid](/output_uid.png)
+![output_uid](img/output_uid.png)
 
 But if we use one which may be unknown, we get a database error.
 
-![error_db](/error_db.png)
+![error_db](img/error_db.png)
 
 ## **Step 3: Injection SQL - Integer Based**
 
@@ -68,23 +68,23 @@ We will not detail all SQL Injection tested using 'single quote', "double quote"
 
 We need to know the right number of columns used by the database. Using "order by" with 5 columns, we get an error: 
 
-![order_by](/order.png)
+![order_by](img/order.png)
 
 But using 4, it is ok meaning that we have 4 columns used. Output "2" and "3" are displayed, thus we can use it to exploit our SQL Injection:
 
 *qrencode '{"uid":"100000000 union select 1,2,3,4"}' -o - | base64 -w 0*
 
-![reflect_value](/reflected_value.png)
+![reflect_value](img/reflected_value.png)
 
 Extracting the current user, the database... 
 
-![output_sqli](/output_sqli.png)
+![output_sqli](img/output_sqli.png)
 
 **Nice** but could we do something better with that? Actually yes => read some local files!
 
-![load_file](/load_file.png)
+![load_file](img/load_file.png)
 
-![check](/check.png)
+![check](img/check.png)
 
 **Great!!!**
 We can leak the source code of the application located in /var/www/html/
@@ -97,13 +97,13 @@ The usefull files to continue the challenge are:
 
 By analyzing the check.php and the Ticket.php files, our final goal is to reach the call to the log() function from the Ticket class. In this function, there is a call to the system function with one controlled user input:
 
-![system](/system.png)
+![system](img/system.png)
 
 It may be a **PHP Object Injection!** Let's verify it...
 
 Back to the check.php file, if there is no **t_uid, object, and sign** keys in the JSON, the program terminates his execution.
 
-![die4](/die4.png)
+![die4](img/die4.png)
 
 We add those JSON keys to continue the execution and pass the condition.
 
@@ -111,9 +111,9 @@ The program request the database for a KEY which will be used to create a Signat
 
 Let's grab it! It would be usefull:
 
-![key](/KEY.png)
+![key](img/KEY.png)
 
-![KEY_2](/KEY_2.png)
+![KEY_2](img/KEY_2.png)
 
 After getting the key, the program create a Signature Object. Call the method Check(), dies if the check is wrong.
 
@@ -125,7 +125,7 @@ To pass the signature, we get the source code of the Ticket.php file on our mach
 * Hardcoding the key in the Signature class as localy it will not request the database
 * Adding the following source code to display the values we need to set in the **object** and **sign** keys:
 
-![code_modified](/code_modified.png)
+![code_modified](img/code_modified.png)
 
 I will explain the added part:
 
@@ -141,13 +141,13 @@ I will explain the added part:
 
 The output of the modified php file will be like:
 
-![test_id_rce](/test_id_rce.png)
+![test_id_rce](img/test_id_rce.png)
 
-![output_rce](/id.png)
+![output_rce](img/id.png)
 
 Let's analyze the server in order to get the flag and finaly have a break to drink a bit!
 
-![laroot](/laroot.png)
+![laroot](img/laroot.png)
 
 Let's create the QRCode for this:
 
@@ -157,16 +157,16 @@ Let's create the QRCode for this:
 
 **Sign**: hash_hmac of the object using the key
 
-![outputflag](/outputflag.png)
+![outputflag](img/outputflag.png)
 
 ## **Step 6: Get the flag, and go drink a beer!**
 
 Get the flag!
 
-![flag](/flag.png)
+![flag](img/flag.png)
 
-![flag_output](/flag_output.png)
+![flag_output](img/flag_output.png)
 
 Flag is: QrSql1_t0_uNs3r1i4lIz3_S0_L0l
 
-![Cheers](/verre-chope.jpg)
+![Cheers](img/verre-chope.jpg)
